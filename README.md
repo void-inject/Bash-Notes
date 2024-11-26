@@ -40,3 +40,5 @@ To save bandwidth and only clone a specific branch, use:
 ```bash
 git clone --branch <branch-name> https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
 ```
+
+(Do not forget to change `<branch-name>` with branch you want to access / clone)
