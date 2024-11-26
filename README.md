@@ -1,44 +1,69 @@
-# BASH
+# Learning Bash
 
-![Awesome ReadME](https://github.com/v1ncenz0graw/headers/raw/main/BA%24H.png)
- ![GitHub Created At](https://img.shields.io/github/created-at/v1ncenz0graw/Learning-Bash-Notes-Projects)
-![GitHub last commit](https://img.shields.io/github/last-commit/v1ncenz0graw/Learning-Bash-Notes-Projects)
+## Overview
+
+This repository contains my **notes** and **projects** as I explore and learn Bash scripting. It serves as both a personal learning resource and a guide for others who want to start their journey with Bash from scratch.
+
+---
+
+## Table of Contents
+
+- [Description](#overview)
+- [Getting Started](#getting-started)
+- [Projects](#projects)
+- [Used Resources](#used-resources)
+
+---
 
 ## Getting Started
 
-This repository is organized to streamline learning and project management:
+This repository is organized to make learning and project management seamless:
 
-- **Notes and Learning Materials**: These are located on the `main` branch and include foundational concepts, examples, and explanations.
-- **Projects**: Each project is maintained on a dedicated branch. The [Projects](#projects) section below provides the project names and brief descriptions to guide you.
+- **Notes and Learning Materials**: Located on the `main` branch, they include foundational concepts, examples, and explanations.
+- **Projects**: Each project is stored on its own dedicated branch. You can explore specific branches for hands-on examples and applications.
 
 ### Clone the Repository
 
-To read this repository locally, clone it using the following command:
+To get started with this repository locally, clone it using the following command:
 
 ```bash
 git clone https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
 ```
 
-After cloning, navigate to the repository folder:
+Navigate to the repository folder:
 
 ```bash
-cd 
+cd Learning-Bash-Notes-Projects
 ```
 
-### Access Specific Project Branches
+### Switch to a Specific Project Branch
 
-If you'd like to explore a specific project, switch to its corresponding branch:
+To access a particular project, switch to its corresponding branch:
 
 ```bash
 git checkout <branch-name>
 ```
 
+Replace `<branch-name>` with the name of the branch you want to explore.
+
 ### Clone a Single Branch
 
-To save bandwidth and only clone a specific branch, use:
+If you only want to clone a specific branch to save bandwidth:
 
 ```bash
 git clone --branch <branch-name> https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
 ```
 
-(Do not forget to change `<branch-name>` with branch you want to access / clone)
+---
+
+## Projects
+
+- **Under Development**  
+    Projects will be added soon as I progress in my learning journey.
+
+---
+
+## Used Resources
+
+- **Under Development**  
+    A detailed list of references and learning materials will be included as the repository grows.
