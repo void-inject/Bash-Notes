@@ -1,6 +1,6 @@
 # Learning Bash
 
-![Awesome ReadME](https://github.com/v1ncenz0graw/headers/raw/main/BA%24H.png)
+![Header](https://github.com/v1ncenz0graw/headers/raw/main/BA%24H.png)
  ![GitHub Created At](https://img.shields.io/github/created-at/v1ncenz0graw/Learning-Bash-Notes-Projects)
 ![GitHub last commit](https://img.shields.io/github/last-commit/v1ncenz0graw/Learning-Bash-Notes-Projects)
 
