@@ -2,68 +2,102 @@ Status: Active(5%)
 
 Tags: #bash #linux #terminal
 
-Links: none
+Links: 
 ___
 
-# 1) Basics
+# 1) Basics of Bash Scripting
 
-## A) exploring shell
-- `#-> env`: shows the list of *environment variables* which BASH loads for every new session. Programs can use these variables for various purposes
-- `#-> echo ${SHELL}`: example of how to check the value of individual variable
-- `#-> man echo`: man(manual) is terminal-based guide that explains all about command, just insert it before any command
-- `#-> echo -h/--help`: same as *man* but insert after command
+## A) Exploring the Shell
+
+- **Environment Variables**:  
+    `#-> env`  
+    Displays a list of _environment variables_ loaded by Bash for every session. These variables can be used by programs for various purposes.
+    
+- **Check Variable Values**:  
+    `#-> echo ${SHELL}`  
+    Example command to display the value of an individual environment variable.
+    
+- **Command Documentation**:
+    
+    - `#-> man echo`  
+        The `man` (manual) command provides detailed documentation about any terminal command. Precede any command with `man` to access its manual.
+    - `#-> echo -h` or `#-> echo --help`  
+        Displays a concise help guide for the command, similar to the `man` command but placed after the command.
+
+---
 
 ## B) Bash Elements
-### _The Shebang Line_
- Every script should start with _shebang_ line:
- ```bash
- #!/bin/bash
+
+### The Shebang Line
+
+Every script should begin with a _shebang_ line to specify the script interpreter:
+
+```bash
+#!/bin/bash
 ```
-Sometimes, you will face with:
+
+Alternatively, you may encounter this:
+
 ```bash
 #!/usr/bin/env bash
 ```
-This method of shebang is more portable than first one cause you will never know whether your target changed location of interpreter.
 
-The shebang line also takes optional arguments like:
+This is a more portable shebang, as it ensures the script uses the correct `bash` interpreter even if its location differs across systems.
+
+#### Optional Shebang Arguments:
+
+The shebang can include arguments to modify script behavior:
+
 ```bash
 #!/bin/bash -x
-
-# prints all commands and their argument to terminal as they are being executed
+# Prints all commands and their arguments to the terminal as they execute.
 ```
 
 ```bash
 #!/bin/bash -n
-
-# used for debugging instead of executing
+# Checks the script for syntax errors without executing it (useful for debugging).
 ```
 
 ```bash
 #!/bin/bash -r
-
-# restricts potentially dangrous commands within script
+# Restricts the execution of potentially dangerous commands.
 ```
 
-Specifying the shebang argument means modifying script, but you can also pass the argument:
+**Alternate Execution Method**:  
+Instead of editing the shebang, pass the arguments directly when running the script:  
 `#-> bash -rx script.sh`
 
-### _Execution_
+---
 
-Scripts can be as short as 2 lines: The shebang Line and Command
-For our first script let's write this:
+### Script Execution Basics
+
+Scripts can be as simple as two lines:
+
+1. The shebang line.
+2. The command(s).
+
+#### Example:
+
+Create a script that displays a message:
+
 ```bash
 #!/usr/bin/env bash
 
 echo "CTRL+C won’t save you now"
 ```
-_P.S: CTRL+C used to kill the proccess on terminal_
 
-Now, save the file as "script.sh".
-open terminal navigate to directory where script is saved.
-Make script executable: `#-> chmod u+x script.sh`
-Then, Run the script: `#-> ./script.sh`
+**Steps to Run the Script**:
 
-Also, you can do this: `#-> bash script.sh` instead of making script executable and then run.
+1. Save the file as `script.sh`.
+2. Open a terminal and navigate to the directory containing the script.
+3. Make the script executable:  
+    `#-> chmod u+x script.sh`
+4. Execute the script:  
+    `#-> ./script.sh`
+
+**Alternate Execution Without Permissions**:  
+You can run the script directly with Bash:  
+`#-> bash script.sh`
 
 ## C) Basic syntax
 

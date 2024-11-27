@@ -15,6 +15,7 @@ This repository contains my **notes** and **projects** as I explore and learn Ba
 
 - [Description](#overview)
 - [Getting Started](#getting-started)
+- [Notes](#notes)
 - [Projects](#projects)
 - [Used Resources](#used-resources)
 
@@ -60,7 +61,9 @@ git clone --branch <branch-name> https://github.com/v1ncenz0graw/Learning-Bash-N
 ```
 
 ---
-
+## Notes
+- [[1) Basics]]
+---
 ## Projects
 
 - **Under Development**  
