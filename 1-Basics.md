@@ -311,7 +311,7 @@ Write a script that does the following:
 5. Makes a backup copy of _output.txt_, named _backup.txt_, using the _cp_ command. (Use _man cp_ if you aren’t sure of the command’s syntax.)
 6. Prints the content of the _output.txt_ file to the standard output stream.
 
-You can find an example solution, in dedicated branch named [Recording Name and Date](link)
+You can find an example solution, in dedicated branch named [Recording Name and Date](https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects/tree/recording-name-and-date)
 
 ---
 
