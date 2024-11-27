@@ -63,6 +63,8 @@ git clone --branch <branch-name> https://github.com/v1ncenz0graw/Learning-Bash-N
 ---
 ## Notes
 - [1) Basics](1-Basics.md) 
+- [2) Flow Control and Text Processing](2-FC_TP.md)
+- 
 ---
 ## Projects
 

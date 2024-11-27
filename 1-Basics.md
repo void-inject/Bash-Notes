@@ -66,8 +66,6 @@ The shebang can include arguments to modify script behavior:
 Instead of editing the shebang, pass the arguments directly when running the script:  
 `#-> bash -rx script.sh`
 
----
-
 ### Script Execution Basics
 
 Scripts can be as simple as two lines:
@@ -222,12 +220,104 @@ Streams are files that act as communication channels between a program and its e
 | Standard error (stderr)  | Errors coming out of a program      | 2                      |
 
 ### Control Operators
+In bash, control operators are tokens that perform a control function:
+
+| Operator | Descriptor                                                                                                 |
+| :------: | ---------------------------------------------------------------------------------------------------------- |
+|    &     | Sends a command to the background.<br>Next command will run even previous command hasn't finished its work |
+|    &&    | Logical AND. The second command will run only if the first command evaluates to true                       |
+| ( and )  | Used for command grouping                                                                                  |
+|    ;     | Used as a list terminator                                                                                  |
+|    ;;    | Ends a case statement                                                                                      |
+|    \|    | Redirects the output of a command as input to another command                                              |
+|   \|\|   | Logical OR. The second command will run if the first one evaluates to false                                |
+
+### Redirection Operators
+Redirection is taking output from one command
+or script and using it as input to another script or file for writing purposes
+
+| Operator | Description                                                                            |
+| -------- | -------------------------------------------------------------------------------------- |
+| >        | Redirects stdout to a file                                                             |
+| >>       | Redirects stdout to a file by appending it to existing content                         |
+| &> or >& | Redirects stdout and stderr to a file                                                  |
+| &>>      | same as previous but appends to existing content                                       |
+| <        | Redirects input to a command                                                           |
+| <<       | Called a _here document_, or _heredoc_, redirects multiple input lines<br>to a command |
+
+### Positional Arguments
+Also called _parameters_. A bash script can access arguments passed to it on the command line
+by using the variables $1, $2, and so on.
+
+|     Variable     | Description                                      |
+| :--------------: | ------------------------------------------------ |
+|        $0        | The name of script file                          |
+| $1, $2, $3, .... | Positional Argument                              |
+|        $#        | The Number of passed parameters                  |
+|        $*        | All positional arguments                         |
+|        $@        | same, where each argument is individually quoted |
+
+### Input Prompting
+Some bash scripts don’t take any arguments during execution. However, they may need to ask the user for information in an interactive way and have the response feed into their runtime. In these cases, we can use the _read_ command.
+```bash
+#!/usr/bin/env bash
+
+# Takes input from the user and assigns it to variables
+echo "What is your first name?"
+read -r firstname
+
+echo "What is your last name?"
+read -r lastname
+
+echo "Your first name is ${firstname} and your last name is ${lastname}"
+```
+
+### Exit Codes
+Bash commands return exit codes, which indicate whether the execution of
+the command succeeded. Exit codes fall in the 0 to 255 range, where 0 means
+success, 1 means failure, 126 means that the command was found but is not
+executable, and 127 means the command was not found. The meaning of any
+other number depends on the specific command being used and its logic.
+
+```bash
+#!/usr/bin/env bash
+# experiment with exit codes
+
+ls -l > /dev/null
+echo "The exit code of the ls command was: $?"
+
+lzl 2> /dev/null
+echo "The exit code of the lzl command was: $?"
+```
+
+```bash
+#!/usr/bin/env bash
+# setting exit code manually
+
+echo "Exiting with exit code: 223"
+exit 223
+```
+Run the script and check exit code after it finishes with `echo $?` which means:
+You can use the $? variable to check the returned exit code not only of a script but also of individual commands after they finished their task.
 
 ___
+
+## Task: Recording Your Name and the Date
+Write a script that does the following:
+1. Accepts two arguments on the command line and assigns them to variables. The first argument should be your first name, and the second should be your last name.
+2. Creates a new file named _output.txt_
+3. Writes the current date to _output.txt_ by using the _date_ command. (Bonus points if you can make the date command print the date in the DD-MM-YYYY format; use `#-> man date` to learn how this works.)
+4. Writes your full name to _output.txt_
+5. Makes a backup copy of _output.txt_, named _backup.txt_, using the _cp_ command. (Use _man cp_ if you aren’t sure of the command’s syntax.)
+6. Prints the content of the _output.txt_ file to the standard output stream.
+
+You can find an example solution, in dedicated branch named [here](link)
+
+---
+
 ## References:
 - You can find full list of Bash variables [here](https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html)
 - Bash doesn't have an official style guide, But it is recommended to use Google's [Shell Style guide](https://google.github.io/styleguide/shellguide.html)
 - Full list of Arithmetic Operators are [here](https://tldp.org/LDP/abs/html/ops.html)
-- 
 
 Created:: 2024-11-27 12:35
