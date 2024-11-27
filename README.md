@@ -62,7 +62,7 @@ git clone --branch <branch-name> https://github.com/v1ncenz0graw/Learning-Bash-N
 
 ---
 ## Notes
-- [[1) Basics]]
+- [1) Basics](1-Basics) 
 ---
 ## Projects
 
