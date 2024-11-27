@@ -2,7 +2,7 @@ Status: Active(5%)
 
 Tags: #bash #linux #terminal
 
-Links: 
+Links: [README](Scripting/Bash/0-Notes/README.md)
 ___
 
 # 1) Basics of Bash Scripting
@@ -11,18 +11,17 @@ ___
 
 - **Environment Variables**:  
     `#-> env`  
-    Displays a list of _environment variables_ loaded by Bash for every session. These variables can be used by programs for various purposes.
+     Displays a list of _environment variables_ loaded by Bash for every session. These variables can be used by programs for various purposes.
     
 - **Check Variable Values**:  
     `#-> echo ${SHELL}`  
-    Example command to display the value of an individual environment variable.
+     Example command to display the value of an individual environment variable.
     
 - **Command Documentation**:
-    
-    - `#-> man echo`  
-        The `man` (manual) command provides detailed documentation about any terminal command. Precede any command with `man` to access its manual.
-    - `#-> echo -h` or `#-> echo --help`  
-        Displays a concise help guide for the command, similar to the `man` command but placed after the command.
+    `#-> man echo`  
+     The `man` (manual) command provides detailed documentation about any terminal command. Precede any command with `man` to access its manual.
+    `#-> echo -h` or `#-> echo --help`  
+     Displays a concise help guide for the command, similar to the `man` command but placed after the command.
 
 ---
 
