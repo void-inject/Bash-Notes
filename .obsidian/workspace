@@ -1,0 +1,110 @@
+{
+  "main": {
+    "id": "46282f834e264563",
+    "type": "split",
+    "children": [
+      {
+        "id": "ffd27642fb8bb0aa",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "dailyNotes/2022-09-19.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f52e06fafa421038",
+    "type": "split",
+    "children": [
+      {
+        "id": "93f00f080efb3236",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d2a414d0abc19c36",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "66db21eab2fcb693",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2ad0a5f6e9f09c33",
+    "type": "split",
+    "children": [
+      {
+        "id": "06c586803a98bedb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4df392febc2841c2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "dailyNotes/2022-09-19.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f6584ac415520716",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "active": "ffd27642fb8bb0aa",
+  "lastOpenFiles": [
+    "dailyNotes/2022-08-22.md",
+    "templates/Misc Templates/MOC Template.md",
+    "_start_here.md",
+    "dailyNotes/2022-08-21.md",
+    "dailyNotes/2022-07-06.md",
+    "templates/book-notes/Book Application Template.md",
+    "templates/book-notes/Book Notes Template.md",
+    "readme.md",
+    "dailyNotes/2022-06-21.md",
+    "bookNotes/Untitled.md"
+  ]
+}
