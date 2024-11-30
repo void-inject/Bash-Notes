@@ -1,8 +1,8 @@
 # Learning Bash
 
-![Header](https://github.com/v1ncenz0graw/headers/raw/main/BA%24H.png)
- ![GitHub Created At](https://img.shields.io/github/created-at/v1ncenz0graw/Learning-Bash-Notes-Projects)
-![GitHub last commit](https://img.shields.io/github/last-commit/v1ncenz0graw/Learning-Bash-Notes-Projects)
+![Header](https://github.com/void-inject/headers/raw/main/BA%24H.png)
+ ![GitHub Created At](https://img.shields.io/github/created-at/void-inject/Learning-Bash-Notes-Projects)
+![GitHub last commit](https://img.shields.io/github/last-commit/void-inject/Learning-Bash-Notes-Projects)
 
 
 ## Overview
@@ -33,7 +33,7 @@ This repository is organized to make learning and project management seamless:
 To get started with this repository locally, clone it using the following command:
 
 ```bash
-git clone https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
+git clone https://github.com/void-inject/Learning-Bash-Notes-Projects.git
 ```
 
 Navigate to the repository folder:
@@ -57,7 +57,7 @@ Replace `<branch-name>` with the name of the branch you want to explore.
 If you only want to clone a specific branch to save bandwidth:
 
 ```bash
-git clone --branch <branch-name> https://github.com/v1ncenz0graw/Learning-Bash-Notes-Projects.git
+git clone --branch <branch-name> https://github.com/void-inject/Learning-Bash-Notes-Projects.git
 ```
 
 ---
@@ -68,8 +68,8 @@ git clone --branch <branch-name> https://github.com/v1ncenz0graw/Learning-Bash-N
 ---
 ## Projects
 
-- **Under Development**  
-    Projects will be added soon as I progress in my learning journey.
+- [1) Task 1](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/recording-name-and-date) 
+- 
 
 ---
 

@@ -291,6 +291,22 @@ Let's say We want to find HTTP paths requested by 42.236.10.117:
 `grep "42.236.10.117" log.txt | awk '{print $7}'`
 
 ### _sed_
+The _sed_ (stream editor) command takes actions on text. For example, it can replace the text in a file, modify the text in a command’s output, and even delete selected lines from files.
+
+Let's replace any mentions of the word Mozilla with the word Godzilla in the log.txt file.
+`sed 's/Mozilla/Godzilla/g' log.txt`
+
+It will not save changes. So redirection:
+`sed 's/Mozilla/Godzilla/g' log.txt > newlog.txt`
+
+We could also use _sed_ to remove any white-space from the file with the `/ //` syntax, which will replace white-space with nothing:
+`sed 's/ //g'`
+
+there are so much to write so use `man sed` to learn more.
+
+---
+
+## F) Job Control
 
 ___
 ## References: 
