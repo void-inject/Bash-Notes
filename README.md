@@ -69,6 +69,7 @@ git clone --branch <branch-name> https://github.com/void-inject/Learning-Bash-No
 ## Projects
 
 - [1) Task 1](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/recording-name-and-date) 
+- [2) Task 2](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Ping)
 - 
 
 ---

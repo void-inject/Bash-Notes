@@ -337,12 +337,13 @@ In this exercise, you’ll write a bash script that accepts two arguments: a nam
 2. Ping the domain and return an indication of whether the ping was successful. (To learn about the ping command, run `man ping`)
 
 3. Write the results to a CSV file containing the following information: 
+
     a. The name provided to the script
     b. The target domain provided to the script
     c. The ping result (either success or failure)
     d. The current date and time
 
-You can find an example solution to this exercise from [here]()
+You can find an example solution to this exercise from [here](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Ping)
 ___
 ## References: 
 - Full List of file test operators are [here](https://ss64.com/bash/test.html)
