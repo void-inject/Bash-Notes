@@ -1,4 +1,4 @@
-Status: On-Going
+Status: Complete
 
 Tags: #bash #linux #shell 
 
@@ -307,10 +307,43 @@ there are so much to write so use `man sed` to learn more.
 ---
 
 ## F) Job Control
+Use `&` to send command to background:
+`sleep 100 &`
 
+Use `jobs` command to see what jobs are currently running:
+```bash
+$ jobs
+
+[1]+ Running        sleep 100 &
+```
+
+Migrate the job from the background to the foreground:
+`fg %1`
+
+`Ctrl-Z` to suspend the process
+
+Send the job to background again:
+`bg %1`
+
+What if we want to keep running a script in the background even after we’ve logged out of the terminal window or closed it?
+`nohup ./my_script.sh &`
+
+---
+## Tasks:
+In this exercise, you’ll write a bash script that accepts two arguments: a name (for example, mysite) and a target domain (for example, nostarch​.com). The script should be able to do the following:
+
+1. Throw an error if the arguments are missing and exit using the right exit code.
+
+2. Ping the domain and return an indication of whether the ping was successful. (To learn about the ping command, run `man ping`)
+
+3. Write the results to a CSV file containing the following information: 
+    a. The name provided to the script
+    b. The target domain provided to the script
+    c. The ping result (either success or failure)
+    d. The current date and time
+
+You can find an example solution to this exercise from [here]()
 ___
 ## References: 
 - Full List of file test operators are [here](https://ss64.com/bash/test.html)
-- 
-
 Created:: 2024-11-28 10:14
