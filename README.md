@@ -64,7 +64,7 @@ git clone --branch <branch-name> https://github.com/void-inject/Learning-Bash-No
 ## Notes
 - [1) Basics](1-Basics.md) 
 - [2) Flow Control and Text Processing](2-FC_TP.md)
-- [3-Setting_Up](3-Setting_Up.md)
+- [3-Setting_Up](Scripting/Bash/0-Notes/3-Setting_Up.md)
 - 
 ---
 ## Projects

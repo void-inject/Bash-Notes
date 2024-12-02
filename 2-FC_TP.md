@@ -2,7 +2,7 @@ Status: Complete
 
 Tags: #bash #linux #shell 
 
-Links: [1-Basics](1-Basics.md) [README](README.md) [3-Setting_Up](3-Setting_Up.md) 
+Links: [1-Basics](1-Basics.md) [README](README.md) [3-Setting_Up](Scripting/Bash/0-Notes/3-Setting_Up.md) 
 ___
 
 # Flow Control and Text Processing
