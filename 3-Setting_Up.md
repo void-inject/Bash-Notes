@@ -38,7 +38,9 @@ Newer Kali releases uses the Z Shell(zsh) by default and don't worry there is no
 sudo usermod --shell /bin/bash <your username>
 su - <your username>
 ```
+
 ---
+
 ## B) The Target Environment
 We encourage you to set up your lab manually at least once by following the instructions in this section. This will allow you to familiarize yourself with the lab’s core components and practice running commands on the command line. However, if you ever need to redeploy the lab from scratch in a fresh installation of Kali, you can do so by:
 ```bash
@@ -47,6 +49,52 @@ git clone https://github.com/void-inject/ACME-Infinity-Servers.git
 cd ACME-Infinity-Servers
 sudo make init
 ```
+
+### Docker Installation:
+**Install Required Dependencies**
+`sudo apt install -y apt-transport-https ca-certificates curl software-properties-common`
+
+**Add Docker's Official GPG Key**
+`curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg`
+
+**Add the Docker Repository**
+`echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list`
+
+**Update the Repository List**
+`sudo apt update -y`
+
+**Install Docker and Docker Compose** 
+`sudo apt install docker-ce docker-ce-cli containerd.io -y`
+
+**Verify Installation**
+`sudo docker compose --help`
+
+**Add Docker to Start-Apps**
+`sudo systemctl enable docker --now`
+
+Docker requires the use of _sudo_, which can get a little inconvenient. If you want to avoid having to enter _sudo_ before executing Docker-related commands, add the kali user to the docker Linux group:
+`sudo usermod -aG docker $USER`
+
+### Deploying Docker Containers
+```bash
+cd ~
+git clone https://github.com/void-inject/ACME-Infinity-Servers.git
+cd ACME-Infinity-Servers
+sudo make deploy
+```
+
+The initial deployment of the lab environment will take a few minutes to complete. To monitor the progress of the installation, you’ll need to open a new terminal session and tail the logfile located under /var/log/​ lab-install.log, like so:
+`tail -f /var/log/lab-install.log`
+When the tail -f (follow) command is used against a file, it provides a live view of any new lines added to the end of the file. This is useful for keeping an eye on logfiles, which frequently have new information written to them.
+### Testing and Verifying the Containers
+Once the logfile indicates the process is complete, it should tell you whether the lab was set up correctly. We can also run a few commands to verify this. First, let’s execute a status check by using the make command, this time with the test argument. If all the checks pass, you should get the following output:
+`$ sudo make test`
+`Lab is up`
+
+or you can run: `sudo make status`
+
+---
+## C) The Network Architecture
 
 ___
 ## References:
