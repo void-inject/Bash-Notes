@@ -2,7 +2,7 @@ Status: On-Going
 
 Tags: #bash #linux #shell 
 
-Links: [2-FC_TP](2-FC_TP.md) [README](Scripting/Bash/0-Notes/README.md) 
+Links: [2-FC_TP](2-FC_TP.md) [README](README.md) [4-Additional_Tools](4-Additional_Tools.md)
 ___
 
 # Setting Up a Hacking Lab
@@ -105,8 +105,27 @@ Once the logfile indicates the process is complete, it should tell you whether t
 or you can run: `sudo make status`
 
 ---
-## C) The Network Architecture
+## C) Managing the Lab
+**Shutting Down**
+When you’re not using the lab environment, turning it off is good practice. 
+To shut down all the containers running in the lab, run the following:
 
+`sudo make teardown`
+
+**Deleteing**
+To completely remove the lab environment from your Kali machine, you can run the clean command. This will destroy all containers and their images:
+
+`sudo make clean`
+
+**Rebuilding**
+When we execute a rebuild, the lab will first shut down all running containers, delete volumes, and remove all container images before running a new deployment. To execute the rebuild, run the following command:
+
+`sudo make rebuild`
+
+**Accessing Individual Lab Machines**
+To gain shell access to any individual lab machine, you can run the following Docker command:
+
+`sudo docker exec -it <machine-name> bash`
 ___
 ## References:
 
