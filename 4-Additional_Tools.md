@@ -25,6 +25,8 @@ sudo apt-get install whatweb -y
 
 We’ll use _WhatWeb_ to perform reconnaissance activities.
 
+---
+
 ## _RustScan_
 
 _RustScan_ is a lightning-fast port scanner written in the Rust programming language. Some claim that _RustScan_ can scan all 65,000 ports on a target in seconds!
@@ -35,6 +37,8 @@ sudo docker pull rustscan/rustscan:2.1.1
 ```
 
 We will use _RustScan_ for port scanning purposes
+
+---
 
 ## _Nuclei_
 
@@ -48,6 +52,8 @@ The first time you run _Nuclei_, it automatically creates a _nuclei-templates_ d
 
 We will use Nuclei to find vulnerabilities in the lab, as well as for writing custom vulnerability checks.
 
+---
+
 ## _dirsearch_
 
 _dirsearch_ is a multithreaded tool used to find common paths on web servers.
@@ -57,6 +63,8 @@ sudo apt-get install dirsearch -y
 ```
 
 We will use _dirsearch_ for information-gathering purposes
+
+---
 
 ## _Linux Exploit Suggester 2_
 
@@ -74,6 +82,8 @@ perl linux-exploit-suggester-2.pl -h
 ```
 
 We will use this tool to enumerate kernel exploits
+
+---
 
 ## _Gitjacker_
 
@@ -97,6 +107,8 @@ test:
 
 We will use _Gitjacker_ to identify misconfigured Git repositories
 
+---
+
 ## _pwncat_
 
 _pwncat_ is a Python-based command-and-control library for capturing and interacting with remote shells. Once _pwncat_ receives a shell connection from a remote compromised host, it acts as an exploitation platform from which commands can be sent and attacks can be launched.
@@ -106,6 +118,8 @@ pip3 install pwncat-cs
 ```
 
 We will use _pwncat_ for penetration-testing purposes
+
+---
 
 ## _LinEnum_
 
@@ -118,6 +132,8 @@ chmod +x LinEnum.sh
 ```
 
 We will use _LinEnum_ to enumerate systems for misconfigurations
+
+---
 
 ## _unix-privesc-check_
 
@@ -132,6 +148,8 @@ sudo apt-get install unix-privesc-check -y
 ```
 
 We will use _unix-privesc-check_ to identify privilege escalation opportunities
+
+---
 
 ## Assigning Aliases to Hacking Tools
 Tools that are installed through third-party repositories such as GitHub sometimes won’t have setup files that make running them easier. We can assign these tools bash aliases as shorthand references so that we won’t need to enter the full directory path every time we run them.
