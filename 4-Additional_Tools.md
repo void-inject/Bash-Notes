@@ -114,7 +114,7 @@ We will use _Gitjacker_ to identify misconfigured Git repositories
 _pwncat_ is a Python-based command-and-control library for capturing and interacting with remote shells. Once _pwncat_ receives a shell connection from a remote compromised host, it acts as an exploitation platform from which commands can be sent and attacks can be launched.
 
 ```bash
-pip3 install pwncat-cs
+sudo apt install pwncat
 ```
 
 We will use _pwncat_ for penetration-testing purposes
@@ -156,15 +156,15 @@ Tools that are installed through third-party repositories such as GitHub sometim
 
 Run these if you use `bash` shell:
 ```bash
-echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> "/home/kali/.bashrc"
+echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> "~/.bashrc"
 
-echo "alias gitjacker='/home/kali/tools/gitjacker'" >> ~/.bashrc
+echo "alias gitjacker='/home/vincenzo/tools/gitjacker'" >> ~/.bashrc
 ```
 If you use `zsh` shell:
 ```bash
-echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> "/home/kali/.zshrc"
+echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> "~/.zshrc"
 
-echo "alias gitjacker='/home/kali/tools/gitjacker'" >> ~/.zshrc
+echo "alias gitjacker='/home/vincenzo/tools/gitjacker'" >> ~/.zshrc
 ```
 RustScan and Gitjacker now have aliases.
 
@@ -174,6 +174,5 @@ ___
 ## References: 
 - [Nuclei templates](https://github.com/projectdiscovery/nuclei-templates)
 - [Linux Exploit Suggester 2](https://github.com/jondonas/linux-exploit-suggester-2.git)
-- 
 
 Created:: 2024-12-03 15:55
