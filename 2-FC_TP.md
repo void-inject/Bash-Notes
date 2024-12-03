@@ -347,4 +347,5 @@ You can find an example solution to this exercise from [here](https://github.com
 ___
 ## References: 
 - Full List of file test operators are [here](https://ss64.com/bash/test.html)
+
 Created:: 2024-11-28 10:14

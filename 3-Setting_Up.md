@@ -1,4 +1,4 @@
-Status: On-Going
+Status: Complete
 
 Tags: #bash #linux #shell 
 
@@ -49,7 +49,7 @@ git clone https://github.com/void-inject/ACME-Infinity-Servers.git
 cd ACME-Infinity-Servers
 sudo make init
 ```
-
+(If you run `sudo make init` you don't need to download Tools mentioned in [4-Additional_Tools](4-Additional_Tools.md) manually)
 ### Docker Installation:
 **Install Required Dependencies**
 
@@ -127,6 +127,5 @@ To gain shell access to any individual lab machine, you can run the following Do
 
 `sudo docker exec -it <machine-name> bash`
 ___
-## References:
 
 Created:: 2024-12-02 15:15
