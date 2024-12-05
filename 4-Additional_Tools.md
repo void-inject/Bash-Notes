@@ -1,8 +1,8 @@
 Status: Complete
 
-Tags: #linux #tools 
+Tags: #linux #tools #kali #shell 
 
-Links: [3-Setting_Up](3-Setting_Up.md) [README](README.md) 
+Links: [3-Setting_Up](3-Setting_Up.md) [README](README.md) [5-Reconnaissance](5-Reconnaissance.md)
 ___
 
 # Additional Tools for Hacking

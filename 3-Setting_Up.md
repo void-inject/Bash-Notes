@@ -1,6 +1,6 @@
 Status: Complete
 
-Tags: #bash #linux #shell 
+Tags: #bash #linux #shell #kali #lab #docker
 
 Links: [2-FC_TP](2-FC_TP.md) [README](README.md) [4-Additional_Tools](4-Additional_Tools.md)
 ___
