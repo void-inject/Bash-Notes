@@ -2,7 +2,7 @@ Status: ongoing
 
 Tags: #kali #lab #reconnaissance #hacking
 
-Links: [4-Additional_Tools](4-Additional_Tools.md) [README](README.md) [6-VulnScan_&_Fuzzing](6-VulnScan_&_Fuzzing.md)
+Links: [4-Additional_Tools](4-Additional_Tools.md) [README](README.md) [6-VulnScan & Fuzzing](6-VulnScan_&_Fuzzing.md)
 ___
 
 # Reconnaissance
@@ -115,6 +115,7 @@ Out-put of scan consists of three fields:
 - vendor details, identified by the first three octets of the MAC address
 
 ## C) Port Scanning
+
 ___
 ## Tasks:
 1. Imagine that you want to be notified whenever a new host appears on the network. For example, maybe you want to know when new laptops or IT assets have connected. This could be useful if you’re testing a target in a different time zone, where device users might not be online when you are.
