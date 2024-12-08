@@ -115,7 +115,9 @@ Out-put of scan consists of three fields:
 - vendor details, identified by the first three octets of the MAC address
 
 ## C) Port Scanning
-.
+Once you’ve discovered hosts on the network, you can run a port scanner to find their open ports and the services they’re running. Let’s explore port scanning by using three tools: `Nmap`, `RustScan`, and `Netcat`
+
+### _nmap_
 ___
 ## Tasks:
 1. Imagine that you want to be notified whenever a new host appears on the network. For example, maybe you want to know when new laptops or IT assets have connected. This could be useful if you’re testing a target in a different time zone, where device users might not be online when you are.

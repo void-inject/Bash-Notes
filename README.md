@@ -64,14 +64,15 @@ git clone --branch <branch-name> https://github.com/void-inject/Learning-Bash-No
 ## Notes
 - [1) Basics](1-Basics.md) 
 - [2) Flow Control and Text Processing](2-FC_TP.md)
-- [3-Setting_Up](Scripting/Bash/0-Notes/3-Setting_Up.md)
-- 
+- [3) Setting_Up](3-Setting_Up.md)
+- [4) Additional_Tools](4-Additional_Tools.md)
+- [5) Reconnaissance](5-Reconnaissance.md)
 ---
 ## Projects
 
-- [1) Task 1](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/recording-name-and-date) 
-- [2) Task 2](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Ping)
-- 
+- [1) Task](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/recording-name-and-date) 
+- [2) Ping](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Ping)
+- [3) Alerts](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Alerts)
 
 ---
 
