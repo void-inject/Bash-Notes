@@ -176,6 +176,7 @@ We use `nc` with the `-z` flag (zero input/output, or I/O, mode, which won’t s
 ---
 
 ## D) Detecting New Open Ports
+
 ___
 ## Tasks:
 
@@ -192,7 +193,7 @@ ___
 
    At the end, you should have a bunch of files, such as _port-22.txt_, _port-80.txt_, and _port-8080.txt_, and in each file, you should see one or more IP addresses at which that port was found to be open. This can be useful when you have a large number of target hosts and want to attack them in clusters by targeting specific protocols associated with given ports.
    
-   Example is here
+   Example is [here](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/ip-sorter)
 ## References:
 
 Created:: 2024-12-04 19:21
