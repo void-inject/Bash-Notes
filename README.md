@@ -67,6 +67,7 @@ git clone --branch <branch-name> https://github.com/void-inject/Learning-Bash-No
 - [3) Setting_Up](3-Setting_Up.md)
 - [4) Additional_Tools](4-Additional_Tools.md)
 - [5) Reconnaissance](5-Reconnaissance.md)
+- [6) VulnScan & Fuzzing](6-VulnScan_&_Fuzzing)
 ---
 ## Projects
 

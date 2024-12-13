@@ -175,7 +175,48 @@ We use `nc` with the `-z` flag (zero input/output, or I/O, mode, which won’t s
 
 ---
 
-## D) Detecting New Open Ports
+## D) Banner Grabbing
+_Banner grabbing_ is the process of extracting the information published by remote network services when a connection is established between two parties. Services often transmit these banners to “greet” clients, which can use the information provided in various ways, such as to ensure they’re connecting to the right target. Banners could also include a system admin message of the day or the service’s specific running version.
+
+_Passive banner grabbing_ uses third-party websites to look up banner information. For example, websites such as [Shodan](https://shodan​.io), [ZoomEye](https://zoomeye​.org), and [Censys](https://censys​.io) perform scans to map the internet, grabbing banners, versions, website pages, and ports, then create an inventory using this data. We can use such websites to look up banner information without ever interacting with the target server ourselves.
+
+_Active banner grabbing_ is the opposite; it establishes a connection to a server and interacts with it directly to receive its banner information.
+
+Keep in mind that banners are generally free-form text fields, and they can be changed to mislead clients. For example, an Apache web server could present itself as another type of web server, such as nginx. Some organizations even create honeypot servers to lure threat actors (or penetration testers). Honeypots use deception technologies to masquerade as vulnerable servers, but their real purpose is to detect and analyze attacker activity. More often than not, however, banners transmit default settings that system administrators haven’t bothered to change.
+
+### _active banner grabbing_
+To demonstrate what active banner grabbing looks like, we’ll use the following Netcat command to connect to port 21 (FTP) running on IP address 172.16.10.11
+```bash
+nc 172.16.10.11 -v 21
+```
+In the output you can see, 172.16.10.11 is running the FTP server vsFTPd version 3.0.5. This information may change if the vsFTPd version gets upgraded or downgraded, or if the system adminstrator decides to disable banner advertisement completely in the FTP server configuration.
+
+And as usual, we can automate this with bash
+
+### Detecting HTTP Responses
+You’ll often find the popular curl HTTP client on production systems. To perform banner grabbing on HTTP responses, we can use curl to send an HTTP request using the HEAD method. The HEAD method allows us to read response headers without fetching the entire response payload from the web server.
+
+Web servers often advertise themselves by setting the Server HTTP response header to their name. Sometimes you may also encounter the running version advertised there. The following curl command sends an HTTP HEAD request to the p-web-01 machine (172.16.10.10:8081):
+```bash
+curl --head 172.16.10.10:8081
+```
+From response we can learn that "remote server is running a Python-based web framework named Werkzeug version 2.2.3, powered by Python version 3.11.1."
+
+### Using Nmap scripts
+Nmap is more than just a port scanner; we can transform it into a fullfledged vulnerability assessment tool. The Nmap Scripting Engine (NSE) allows penetration testers to write scripts in the Lua language to extend Nmap’s capabilities. Nmap comes preinstalled with some Lua scripts, as you can see in `/usr/share/nmap/scripts`
+
+The _banner.nse_ script in the `/usr/share/nmap/scripts` folder allows you to grab the banners from many hosts simultaneously. The following bash command uses this script to perform a banner grab and service discovery (sV):
+```bash
+nmap -sV --script=banner.nse -iL 172-16-10-hosts.txt
+```
+
+When the banner-grabbing script finds a banner, the output line containing that banner will begin with a special character sequence (|\_). We can filter for this sequence to extract banner information, like so:
+```bash
+nmap -sV --script=banner.nse -iL 172-16-10-hosts.txt | grep "|_banner\||_http-server-header"
+```
+
+The blackice-icecap? value indicates that Nmap is unable to definitively discover the identity of the service. But if you look closely at the fingerprint-strings dump, you’ll see some HTTP​-related information that reveals the same response headers we found when banner grabbing manually using curl. Specifically, note the Werkzeug web server banner. With a bit of googling, you’ll find that this server runs on Flask, a Python-based web framework.
+
 
 ___
 ## Tasks:
