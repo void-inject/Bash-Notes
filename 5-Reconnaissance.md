@@ -1,4 +1,4 @@
-Status: ongoing
+Status: Complete
 
 Tags: #kali #lab #reconnaissance #hacking
 
@@ -114,6 +114,33 @@ Out-put of scan consists of three fields:
 - MAC Address
 - vendor details, identified by the first three octets of the MAC address
 
+### Analyzing Websites and JSON
+Let’s use WhatWeb to see the services running on the web applications in the 172.16.10.0/24 network. We’ll begin by looking at 172.16.10.10 (p-web-01) on port 8081:
+```bash
+whatweb 172.16.10.10:8081
+```
+
+WhatWeb can format the output in JSON with the --log-json param-
+eter, which expects a filename passed as its value. But what if we want to
+send the output to the screen without writing it to the disk? We can pro-
+vide the parameter with the /dev/stdout file, forcing it to send its output
+to standard output:
+```bash
+whatweb 172.16.10.10:8081 --log-json=/dev/stdout --quiet | jq
+```
+
+The output is an array of objects, and we can use a tool such as jq to extract the relevant information. For example, let’s extract the value of HTTPServer:
+```bash
+whatweb 172.16.10.10:8081 --log-json=/dev/stdout --quiet | jq '.[0].plugins.HTTPServer.string[0]'
+```
+
+The jq syntax might seem a little odd at first, so let’s dissect it. We place the pattern to extract between two single quotes ('). Here, we select the first element in the array (.[0]), which contains various objects composed of keys and values. Then we select the plugins key, followed by the HTTPServer key. Within the HTTPServer key, there is another key named string, which is an array. We select the first element in that array by using string[0], which holds the value Werkzeug/2.3.7 Python/3.11.4.
+
+Similarly, we can extract the IP address. Just swap the HTTPServer key with the IP key:
+```bash
+whatweb 172.16.10.10:8081 --log-json=/dev/stdout --quiet | jq '.[0].plugins.IP.string[0]'
+```
+
 ---
 
 ## C) Port Scanning
@@ -217,6 +244,13 @@ nmap -sV --script=banner.nse -iL 172-16-10-hosts.txt | grep "|_banner\||_http-se
 
 The blackice-icecap? value indicates that Nmap is unable to definitively discover the identity of the service. But if you look closely at the fingerprint-strings dump, you’ll see some HTTP​-related information that reveals the same response headers we found when banner grabbing manually using curl. Specifically, note the Werkzeug web server banner. With a bit of googling, you’ll find that this server runs on Flask, a Python-based web framework.
 
+### Detecting Operating Systems
+Nmap can also guess the target server’s running operating system by using TCP/IP fingerprinting, which is part of its operating system detection scan. This technique identifies the implementation of the operating system’s TCP/IP stack by crafting packets in various ways and analyzing the returned responses. Each operating system implements the TCP/IP stack slightly differently, and Nmap analyzes these subtle differences to identify the running system. In some cases, Nmap may also be able to identify the running kernel version.
+
+To run an operating system detection scan, use the `-O` flag in Nmap:
+```bash
+sudo nmap -O -iL 172-16-10-hosts.txt
+```
 
 ___
 ## Tasks:
