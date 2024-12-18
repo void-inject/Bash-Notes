@@ -16,7 +16,6 @@ This repository contains my **notes** and **projects** as I explore and learn Ba
 - [Description](#overview)
 - [Getting Started](#getting-started)
 - [Notes](#notes)
-- [Projects](#projects)
 - [Used Resources](#used-resources)
 
 ---
@@ -68,13 +67,6 @@ git clone --branch <branch-name> https://github.com/void-inject/Learning-Bash-No
 - [4) Additional_Tools](4-Additional_Tools.md)
 - [5) Reconnaissance](5-Reconnaissance.md)
 - [6) VulnScan & Fuzzing](6-VulnScan_&_Fuzzing)
----
-## Projects
-
-- [1) Task](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/recording-name-and-date) 
-- [2) Ping](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Ping)
-- [3) Alerts](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Alerts)
-
 ---
 
 ## Used Resources
