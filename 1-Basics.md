@@ -1,6 +1,6 @@
 Status: Complete
 
-Tags: #bash #linux #shell-scripting #variables #control-flow #streams #file-redirection #debugging
+Tags: #bash #linux #shell-scripting #variables #flow-control #streams #file-redirection #debugging
 
 Links: [README](README.md) [2-FC_TP](2-FC_TP.md)
 

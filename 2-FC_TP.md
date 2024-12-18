@@ -1,351 +1,394 @@
 Status: Complete
 
-Tags: #bash #linux #shell 
+Tags: #bash #linux #shell-scripting #job-control #flow-control #file-handling #text-processing #functions 
 
-Links: [1-Basics](1-Basics.md) [README](README.md) [3-Setting_Up](3-Setting_Up.md) 
-___
+Links: [1-Basics](1-Basics.md) [README](README.md) [3-Setting_Up](3-Setting_Up.md)
 
-# Flow Control and Text Processing
-## A) Test Operators
-Bash lets us selectively execute commands when certain conditions of interest are met. We can use test operators to craft a wide variety of conditions, such as whether one value equals another value, whether a file is of a certain type, or whether one value is greater than another. We often rely on such tests to determine whether to continue running a block of code, so being able to construct them is fundamental to bash programming.
+---
+## Flow Control and Text Processing in Bash
 
-- File test Operators:
+### Overview
 
-| Operator | Description                                       |
-| :------: | ------------------------------------------------- |
-|    -d    | Checks whether the file is a directory            |
-|    -r    | Checks whether the file is readable               |
-|    -x    | Checks whether the file is executable             |
-|    -w    | Checks whether the file is writable               |
-|    -f    | Checks whether the file is a regular file         |
-|    -s    | Checks whether the file size is greater than zero |
-
--  String Comparison Operators:
-
-| Operator | Description                                                  |
-| :------: | ------------------------------------------------------------ |
-|    =     | Checks whether a string is equal to another string           |
-|    ==    | Synonym of = when used within [[]] constructs                |
-|    !=    | Checks whether a string is not equal to another string       |
-|    <     | Checks whether a string comes before another string<br>(A-z) |
-|    >     | Checks whether a string comes after another string<br>(A-z)  |
-|    -z    | Checks whether a string is null                              |
-|    -n    | Checks whether a string is not null                          |
-
-- Integer Comparison Operators
-
-| Operator | Description                                        |
-| :------: | -------------------------------------------------- |
-|   -eq    | Checks whether a number is equal to another number |
-|   -ne    | Checks whether a number is not equal               |
-|   -ge    | Checks whether a number is greater than/equal to   |
-|   -gt    | Checks whether a number is greater than            |
-|   -lt    | Checks whether a number is less than               |
-|   -le    | Checks whether a number is less than/ equal to     |
+This guide introduces essential Bash scripting concepts, including flow control, loops, functions, and text processing tools like `grep`, `awk`, and `sed`. By the end, you’ll have a better grasp of building scripts to automate tasks and manage text efficiently.
 
 ---
 
-## B) if Conditions
- Syntax:
+### A) Test Operators
+
+In Bash, **test operators** allow us to execute commands based on conditions, such as file attributes, string comparisons, or numerical evaluations. Understanding these operators is crucial for effective scripting.
+
+#### 1. File Test Operators
+
+These operators help determine file attributes:
+
+|**Operator**|**Description**|
+|:-:|---|
+|`-d`|Checks if the file is a directory|
+|`-r`|Checks if the file is readable|
+|`-x`|Checks if the file is executable|
+|`-w`|Checks if the file is writable|
+|`-f`|Checks if the file is a regular file|
+|`-s`|Checks if the file size is greater than zero|
+
+Example:
+
 ```bash
-#!/usr/bin/env bash
-
-if [[ condition ]]; then
-	# Code Block if condition is true
+file="example.txt"
+if [ -f "$file" ]; then
+    echo "$file exists and is a regular file."
 else
-	# Code Block if condition is flase
-fi
-
-# In some operating systems, such as those often used in containers,
-# the default shell might not necessarily be bash.
-# To account for these cases, you may want to use single square 
-# brackets ([...]) rather than double to enclose your condition.
-# This use of single brackets meets the Portable Operating System Interface 
-# standard and should work on almost any Unix derivative, including Linux.
-```
-
-We can check for multiple conditions within one if condition using `&&` and  `||` operators:
-```bash
-#!/usr/bin/env bash
-
-if [ condition_1 && condition_2 ] then
-	.....
-else
-	.....
+    echo "$file does not exist."
 fi
 ```
 
-As we continue with bash scripting, not all of commands will end with success due to some reasons like:
-- Lack of permissions
-- Absence of command package
-- Lack of space when downloading package
-- Lack of data connection
+#### 2. String Comparison Operators
 
-Thanks to if condition we can test the exit code of commands:
+These operators compare string values:
+
+|**Operator**|**Description**|
+|:-:|---|
+|`=`|Checks if two strings are equal|
+|`!=`|Checks if two strings are not equal|
+|`<`|Checks if one string is lexicographically smaller|
+|`>`|Checks if one string is lexicographically greater|
+|`-z`|Checks if a string is empty|
+|`-n`|Checks if a string is not empty|
+
+Example:
+
 ```bash
-if touch test123; then
-	echo "SUCCESS: file created"
+string="hello"
+if [ -z "$string" ]; then
+    echo "String is empty."
 else
-	echo "ERROR: file already exists"
+    echo "String is: $string"
 fi
 ```
 
-We can use `else if` as `elif`
+#### 3. Integer Comparison Operators
+
+These operators compare numerical values:
+
+| **Operator** | **Description**                                  |
+| :----------: | ------------------------------------------------ |
+|    `-eq`     | Checks if two numbers are equal                  |
+|    `-ne`     | Checks if two numbers are not equal              |
+|    `-gt`     | Checks if one number is greater than another     |
+|    `-lt`     | Checks if one number is less than another        |
+|    `-ge`     | Checks if one number is greater than or equal to |
+|    `-le`     | Checks if one number is less than or equal to    |
+
+Example:
+
+```bash
+number=5
+if [ $number -gt 0 ]; then
+    echo "$number is positive."
+fi
+```
 
 ---
 
-## C) Functions
-Syntax:
-```bash
-#!/usr/bin/env bash
+### B) `if` Conditions
 
-check_if_root(){
-	if [ "${EUID}" -eq "0" ]; then
-		return 0
-	else 
-		return 1
-	fi
+The `if` statement evaluates conditions and runs code blocks based on their results. Here’s the syntax:
+
+```bash
+if [ condition ]; then
+    # Code block if the condition is true
+else
+    # Code block if the condition is false
+fi
+```
+
+#### Multiple Conditions
+
+Combine conditions using `&&` (AND) or `||` (OR):
+
+```bash
+if [ condition1 ] && [ condition2 ]; then
+    echo "Both conditions are true."
+fi
+```
+
+#### Example: Check Command Success
+
+We can test the success of a command using an `if` statement:
+
+```bash
+if touch test_file; then
+    echo "File created successfully."
+else
+    echo "Failed to create file."
+fi
+```
+
+#### Using `elif`
+
+The `elif` statement handles additional conditions:
+
+```bash
+if [ $value -eq 1 ]; then
+    echo "Value is 1."
+elif [ $value -eq 2 ]; then
+    echo "Value is 2."
+else
+    echo "Value is neither 1 nor 2."
+fi
+```
+
+---
+
+### C) Functions
+
+Functions in Bash allow you to organize and reuse code. Here’s the syntax:
+
+```bash
+function_name() {
+    # Code block
+}
+```
+
+#### Example: Check Root User
+
+```bash
+check_if_root() {
+    if [ "$EUID" -eq 0 ]; then
+        echo "User is root."
+    else
+        echo "User is not root."
+    fi
 }
 
-if check_if_root; then
-	echo "User is root!"
-else 
-	ECHO "User is not root!"
-fi
+check_if_root
 ```
 
-Accepting Arguments:
-```bash
-#!/usr/bin/env bash
+#### Accepting Arguments in Functions
 
-print_args(){
-	echo "First: ${1}, Second: ${2}, Third: ${3}"
+Use positional parameters `$1`, `$2`, etc., to pass arguments:
+
+```bash
+print_args() {
+    echo "First: $1, Second: $2"
 }
 
-print_args bir ikki uch
+print_args "arg1" "arg2"
 ```
 
 ---
 
-## D) Loops & Loop Control
-### _while_:
-In bash, while loops allow you to run a code block until a test returns a successful exit status code.
+### D) Loops and Loop Control
 
-Syntax:
+#### 1. `while` Loops
+
+The `while` loop runs a block of code as long as a condition is true:
+
 ```bash
-while some_condition; do
-	# Code block while condition is true
+while [ condition ]; do
+    # Code block
 done
 ```
 
 Example:
+
 ```bash
-#!/usr/bin/env bash
-
-target="browser_history.log"
-
-while [ ! -f "${target}" ]; do
-	echo "Logs are clear"
-done
-
-rm -rf ${target}
-echo "Evidances are destroyed successfully!!!"
-```
-(You already get the idea, right?)
-
-### _until_: 
-Whereas _while_ runs as long as condition succeeds, _until_ runs as long as condition is fails
-
-Syntax: 
-```bash
-until some_condition; do
-	# Code block until condition succeeds
-done
-```
-and usage is pretty same as _while_
-
-### _for_:
-The for loop iterates over a sequence, such as a list of filenames or variables, or even a group of values generated by running a command. Inside the for loop, we define a block of commands that are run against each value in the list, and each value in the list is assigned to a variable name we define.
-
-Syntax:
-```bash
-for variable_name in LIST; do
-	# Run some commands for each item in the sequence
+count=0
+while [ $count -lt 5 ]; do
+    echo "Count: $count"
+    ((count++))
 done
 ```
 
-A simple way to use a for loop is to execute the same command multiple
-times:
-```bash
-#!/usr/bin/env bash
+#### 2. `until` Loops
 
-for ip_address in "$@"; do
-	echo "Taking some action on IP address: ${ip_address}"
+The `until` loop runs until a condition becomes true:
+
+```bash
+until [ condition ]; do
+    # Code block
 done
-
-```
-
-### _break_ & _continue_
-Using _break,_ we can leave the loop and advance to the next code block:
-```bash
-#/usr/bin/env bash
-
-while true; do
-	echo "Go get life"
-	break
-done
-```
-
-The _continue_ statement is used to jump to the next iteration of a loop.
-We can use it to skip a certain value in a sequence:
-```bash
-#/usr/bin/env bash
-
-for file_name in file_name*; do
-	
-	if [ "${file}" == "file_name2" ]; then
-		echo "Skipping the second file!"
-		continue
-	fi
-
-	echo "${RANDOM}" > "${file}"
-done
-```
-
-### _case_ Statements
-In bash, case statements allow you to test multiple conditions in a cleaner way by using more readable syntax. Often, they help you avoid many if conditions, which can become harder to read as they grow in size.
-
-Syntax:
-```bash
-case EXPRESSION in
-	PATTERN1)
-		# Write you GF's name if the first condition is met
-	;;
-	PATTERN2)
-		# no GF? Are you gay?
-	;;
-esac
 ```
 
 Example:
+
+```bash
+count=0
+until [ $count -ge 5 ]; do
+    echo "Count: $count"
+    ((count++))
+done
+```
+
+#### 3. `for` Loops
+
+The `for` loop iterates over a list of values:
+
+```bash
+for value in list; do
+    # Code block
+done
+```
+
+Example:
+
+```bash
+for file in *.txt; do
+    echo "Processing $file"
+done
+```
+
+#### 4. Loop Control: `break` and `continue`
+
+- **`break`**: Exit the loop early.
+- **`continue`**: Skip to the next iteration.
+
+Example:
+
+```bash
+for i in {1..5}; do
+    if [ $i -eq 3 ]; then
+        echo "Skipping $i"
+        continue
+    fi
+    echo "Processing $i"
+done
+```
+
+---
+
+### E) Text Processing and Parsing
+
+#### 1. `grep`
+
+The `grep` command searches for patterns in text files.
+
+**Basic Usage:**
+
+```bash
+grep "pattern" file.txt
+```
+
+**Examples:**
+
+- Search for specific text:
+```bash
+grep "error" log.txt
+```
+
+- Case-insensitive search:
+```bash
+grep -i "error" log.txt
+```
+
+- Search for multiple patterns:
+```bash
+grep -e "error" -e "warning" log.txt
+```
+
+#### 2. `awk`
+The `awk` command extracts and processes fields in text files.
+
+**Examples:**
+
+- Print the first column:
+```bash
+awk '{print $1}' file.txt
+```
+
+- Print specific columns:
+```bash
+awk '{print $1, $3}' file.txt
+```
+
+- Change the field delimiter (e.g., from spaces to commas):
+```bash
+awk -F',' '{print $1}' file.csv
+```
+
+#### 3. `sed`
+
+The `sed` command edits text streams.
+
+**Examples:**
+
+- Replace text:
+```bash
+sed 's/old/new/g' file.txt
+```
+
+- Delete lines containing a pattern:
+```bash
+sed '/pattern/d' file.txt
+```
+
+---
+
+### F) Job Control
+
+#### Background Processes
+
+Run a process in the background using `&`:
+
+```bash
+sleep 100 &
+```
+
+#### Managing Jobs
+
+- List background jobs:
+```bash
+jobs
+```
+
+- Bring a job to the foreground:
+```bash
+fg %1
+```
+
+- Suspend a job (Ctrl+Z) and send it back to the background:
+```bash
+bg %1
+````
+
+#### Persistent Background Jobs
+Keep a process running even after logging out using `nohup`:
+```bash
+nohup ./script.sh &
+````
+
+---
+
+### Tasks
+
+Write a script that:
+
+1. Accepts two arguments: a name and a target domain.
+2. Checks if arguments are provided, else exits with an error.
+3. Pings the target domain and indicates success or failure.
+4. Logs results to a CSV file with:
+    - The provided name
+    - The target domain
+    - Ping result
+    - Current date and time
+
+#### Example Solution
+
 ```bash
 #!/usr/bin/env bash
 
-IP="${1}"
+name="$1"
+domain="$2"
 
-case ${IP} in
-	192.168.*)
-		echo "Network is 192.168.x.x"
-	;;
-	10.10.*)
-		echo "Network is 10.0.x.x"
-	;;
-	*)
-		echo "Couldn't identify the network"
-	;;
-esac
+if [ -z "$name" ] || [ -z "$domain" ]; then
+    echo "Error: Missing arguments." >&2
+    exit 1
+fi
+
+if ping -c 1 "$domain" &> /dev/null; then
+    result="success"
+else
+    result="failure"
+fi
+
+echo "$name,$domain,$result,$(date)" >> results.csv
 ```
-
----
-
-## E) Text Processing and Parsing
-#####  _you can find used log file on materials folder, if you wanna try out things by yourself_
-### _grep_
-The grep command is one of the most popular Linux commands out there today. We use grep to filter out information of interest from streams.
-
-Basic usage:
-`grep "35.237.4.214" log.txt`
-
-Sort multiple patterns:
-`grep "35.237.4.214\|13.66.139.0" log.txt`
-or
-`grep -e "35.237.4.214" -e "13.66.139.0" log.txt`
-
-By default, grep is case sensitive:
-`ps | grep -i tty` not anymore
-
-Or we can exclude the line that contains defined pattern:
-`grep -v "35.237.4.214" log.txt`
-
-Sometimes output becomes to long reason _grep_ prints whole line where pattern is found:
-`grep -o "35.237.4.214" log.txt` here's your solution
-
-### _awk_
-The _awk_ command is a data processing and extraction Swiss Army knife. You can use it to identify and return specific fields from a file.
-
-What if we need to print just the IP addresses from this file?
-`awk '{print $1}' log.txt`
-
-Using same syntax, we can print additional fields:
-`awk '{print $1,$3,$NF}' log.txt` ($NF = last field)
-
-By default, _awk_ treats spaces or tabs as separators or delimiters.
-Here's how you can modify it to comma
-`awk -F',' '{print $1}' example_csv.txt`
-
-Print 10 lines of file:
-`awk 'NR < 10' log.txt`
-
-Now imagine combining _grep_ & _awk_ 
-Let's say We want to find HTTP paths requested by 42.236.10.117:
-`grep "42.236.10.117" log.txt | awk '{print $7}'`
-
-### _sed_
-The _sed_ (stream editor) command takes actions on text. For example, it can replace the text in a file, modify the text in a command’s output, and even delete selected lines from files.
-
-Let's replace any mentions of the word Mozilla with the word Godzilla in the log.txt file.
-`sed 's/Mozilla/Godzilla/g' log.txt`
-
-It will not save changes. So redirection:
-`sed 's/Mozilla/Godzilla/g' log.txt > newlog.txt`
-
-We could also use _sed_ to remove any white-space from the file with the `/ //` syntax, which will replace white-space with nothing:
-`sed 's/ //g'`
-
-there are so much to write so use `man sed` to learn more.
-
----
-
-## F) Job Control
-Use `&` to send command to background:
-`sleep 100 &`
-
-Use `jobs` command to see what jobs are currently running:
-```bash
-$ jobs
-
-[1]+ Running        sleep 100 &
-```
-
-Migrate the job from the background to the foreground:
-`fg %1`
-
-`Ctrl-Z` to suspend the process
-
-Send the job to background again:
-`bg %1`
-
-What if we want to keep running a script in the background even after we’ve logged out of the terminal window or closed it?
-`nohup ./my_script.sh &`
-
----
-## Tasks:
-In this exercise, you’ll write a bash script that accepts two arguments: a name (for example, mysite) and a target domain (for example, nostarch​.com). The script should be able to do the following:
-
-1. Throw an error if the arguments are missing and exit using the right exit code.
-
-2. Ping the domain and return an indication of whether the ping was successful. (To learn about the ping command, run `man ping`)
-
-3. Write the results to a CSV file containing the following information: 
-
-    a. The name provided to the script
-    b. The target domain provided to the script
-    c. The ping result (either success or failure)
-    d. The current date and time
-
-You can find an example solution to this exercise from [here](https://github.com/void-inject/Learning-Bash-Notes-Projects/tree/Ping)
-___
-## References: 
-- Full List of file test operators are [here](https://ss64.com/bash/test.html)
-
-Created:: 2024-11-28 10:14
