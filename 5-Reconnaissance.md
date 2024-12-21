@@ -1,6 +1,6 @@
 [4-Additional_Tools](4-Additional_Tools.md) [README](Bash-Notes/README.md) [6-VulnScan_&_Fuzzing](6-VulnScan_&_Fuzzing.md)
 
-**Tags**: #bash #shell-scripting #linux #sed #ping #curl #reconnaissance #nmap #rustscan #netcat #arpscan #whatweb #host_discovery #network_discovery #port_discovery #service_detection #fingerprinting #banner_grabbing
+**Tags**: #bash #shell-scripting #linux #sed #ping #curl #lab #reconnaissance #nmap #rustscan #netcat #arpscan #whatweb #host_discovery #network_discovery #port_discovery #service_detection #fingerprinting #banner_grabbing
 
 ---
 # Reconnaissance in Penetration Testing

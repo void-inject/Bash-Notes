@@ -390,3 +390,4 @@ fi
 
 echo "$name,$domain,$result,$(date)" >> results.csv
 ```
+
