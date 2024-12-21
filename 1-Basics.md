@@ -1,8 +1,6 @@
-Status: Complete
+[README](Bash-Notes/README.md) [2-FC_TP](2-FC_TP.md)
 
 Tags: #bash #linux #shell-scripting #variables #flow-control #streams #file-redirection #debugging
-
-Links: [README](README.md) [2-FC_TP](2-FC_TP.md)
 
 ---
 

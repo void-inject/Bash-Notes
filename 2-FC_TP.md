@@ -1,8 +1,6 @@
-Status: Complete
+[1-Basics](1-Basics.md) [README](Bash-Notes/README.md) [3-Setting_Up](3-Setting_Up.md)
 
 Tags: #bash #linux #shell-scripting #job-control #flow-control #file-handling #text-processing #functions 
-
-Links: [1-Basics](1-Basics.md) [README](README.md) [3-Setting_Up](3-Setting_Up.md)
 
 ---
 ## Flow Control and Text Processing in Bash

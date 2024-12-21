@@ -1,129 +1,167 @@
-Status: Complete
+[3-Setting_Up](3-Setting_Up.md) [README](Bash-Notes/README.md) [5-Reconnaissance](5-Reconnaissance.md)
 
-Tags: #linux #tools #kali #shell 
+Tags: #linux #tools #kali #hacking #shell-scripting #tools #reconnaissance #vulnerability_scanning #whatweb #rustscan #nuclei #dirsearch #linuxexploitsuggester2 #gitjacker #pwncat #linenum #unixprivesccheck
 
-Links: [3-Setting_Up](3-Setting_Up.md) [README](README.md) [5-Reconnaissance](5-Reconnaissance.md)
-___
+---
 
 # Additional Tools for Hacking
-Most of tools we use are already installed in Kali, but still some of them should be installed manually.
 
-First, create dedicated folder for tools:
+Kali Linux comes pre-installed with many useful tools, but some additional tools need to be manually installed to enhance your hacking lab environment.
+
+To keep things organized, first, create a dedicated folder for storing these tools:
+
 ```bash
 cd ~
 mkdir tools
 ```
-move on to the folder and start installing tools mentioned below.
 
-## _WhatWeb_
+Move into the `tools` directory and start installing the tools listed below.
 
-_WhatWeb_ can fingerprint websites and their application stack by using its database of known application signatures. _WhatWeb_ can also identify particular content management systems and blogging platforms (such as WordPress), web cameras, web application firewalls, and more. As of this writing, _WhatWeb_ has over 1,800 plug-ins
+---
+
+## 1. _WhatWeb_
+
+_WhatWeb_ fingerprints websites and identifies their application stacks using a database of known application signatures. It can detect content management systems (CMS) like WordPress, web application firewalls (WAFs), and more.
+
+Install _WhatWeb_:
 
 ```bash
 sudo apt-get install whatweb -y
 ```
 
-We’ll use _WhatWeb_ to perform reconnaissance activities.
+Example usage:
+
+```bash
+whatweb example.com
+```
 
 ---
 
-## _RustScan_
+## 2. _RustScan_
 
-_RustScan_ is a lightning-fast port scanner written in the Rust programming language. Some claim that _RustScan_ can scan all 65,000 ports on a target in seconds!
+_RustScan_ is a fast port scanner written in Rust. It can scan all 65,535 ports on a target within seconds.
 
-we use _RustScan_'s docker version:
+Install the Docker version of _RustScan_:
+
 ```bash
 sudo docker pull rustscan/rustscan:2.1.1
 ```
 
-We will use _RustScan_ for port scanning purposes
+Example usage:
+
+```bash
+docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1 -a example.com
+```
 
 ---
 
-## _Nuclei_
+## 3. _Nuclei_
 
-_Nuclei_ is a vulnerability scanner written in the Go programming language by **ProjectDiscovery**, a company that builds popular open source hacking tools
+_Nuclei_ is a vulnerability scanner written in Go by **ProjectDiscovery**. It includes publicly available templates for detecting vulnerabilities.
+
+Install _Nuclei_:
 
 ```bash
 sudo apt-get install nuclei -y
 ```
 
-The first time you run _Nuclei_, it automatically creates a _nuclei-templates_ directory in the user’s home folder and downloads all the publicly available Nuclei templates. You can find those templates from official [github repo](https://github.com/projectdiscovery/nuclei-templates)
+First-time setup:
 
-We will use Nuclei to find vulnerabilities in the lab, as well as for writing custom vulnerability checks.
+```bash
+nuclei -update-templates
+```
+
+Example usage:
+
+```bash
+nuclei -u https://example.com -t ~/nuclei-templates/vulnerabilities/
+```
 
 ---
 
-## _dirsearch_
+## 4. _dirsearch_
 
-_dirsearch_ is a multithreaded tool used to find common paths on web servers.
+_dirsearch_ is a multithreaded tool for discovering hidden directories and files on web servers.
+
+Install _dirsearch_:
 
 ```bash
 sudo apt-get install dirsearch -y
 ```
 
-We will use _dirsearch_ for information-gathering purposes
+Example usage:
+
+```bash
+dirsearch -u https://example.com -e php,html,txt
+```
 
 ---
 
-## _Linux Exploit Suggester 2_
+## 5. _Linux Exploit Suggester 2_
 
-The _Linux Exploit Suggester 2_ is a next-gen tool based on the original **Linux Exploit Suggester**. Written in Perl, it includes several exploits you can use to potentially compromise vulnerable Linux kernel versions
+_Linux Exploit Suggester 2_ identifies kernel exploits for vulnerable Linux systems.
+
+Clone the repository:
 
 ```bash
 cd ~/tools
 git clone https://github.com/jondonas/linux-exploit-suggester-2.git
 ```
 
-test:
+Run the tool:
+
 ```bash
 cd linux-exploit-suggester-2
-perl linux-exploit-suggester-2.pl -h
+perl linux-exploit-suggester-2.pl
 ```
-
-We will use this tool to enumerate kernel exploits
 
 ---
 
-## _Gitjacker_
+## 6. _Gitjacker_
 
-_Gitjacker_ is a data-extraction tool that targets web applications whose .git directory has been mistakenly uploaded. Before you can install _Gitjacker_, you’ll first need to install _jq_, a command line JSON processor:
+_Gitjacker_ extracts sensitive data from improperly configured `.git` directories.
+
+Install _Gitjacker_:
 
 ```bash
 sudo apt-get install jq -y
-```
-
-```bash
 cd ~
 curl -s "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
 mv ./bin/gitjacker ~/tools/gitjacker
 rmdir ./bin
 ```
 
-test:
+Test the tool:
+
 ```bash
 ~/tools/gitjacker -h
 ```
 
-We will use _Gitjacker_ to identify misconfigured Git repositories
-
 ---
 
-## _pwncat_
+## 7. _pwncat_
 
-_pwncat_ is a Python-based command-and-control library for capturing and interacting with remote shells. Once _pwncat_ receives a shell connection from a remote compromised host, it acts as an exploitation platform from which commands can be sent and attacks can be launched.
+_pwncat_ is a Python-based exploitation platform for interacting with remote shells.
+
+Install _pwncat_:
 
 ```bash
-sudo apt install pwncat
+sudo apt install pwncat -y
 ```
 
-We will use _pwncat_ for penetration-testing purposes
+Example usage:
+
+```bash
+pwncat -l 4444
+```
 
 ---
 
-## _LinEnum_
+## 8. _LinEnum_
 
-_LinEnum_ is a bash script for enumerating local information on a Linux host
+_LinEnum_ is a Bash script for gathering system information and identifying potential privilege escalation vectors.
+
+Download the script:
 
 ```bash
 cd ~/tools
@@ -131,48 +169,60 @@ wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
 chmod +x LinEnum.sh
 ```
 
-We will use _LinEnum_ to enumerate systems for misconfigurations
+Run _LinEnum_:
+
+```bash
+./LinEnum.sh
+```
 
 ---
 
-## _unix-privesc-check_
+## 9. _unix-privesc-check_
 
-The _unix-privesc-check_ shell scrip collects information from a host in an attempt to find misconfigurations and ways to escalate privileges. The script is written to support many flavors of Linux and Unix systems and does not require any dependencies, which makes it convenient to run
+_unix-privesc-check_ analyzes a Unix/Linux system for privilege escalation opportunities.
 
-By default, the script comes bundled with Kali, and you should find it in `/usr/bin/unix-privesc-check`
-Optionally, you can create a copy of it in the tools directory for easier access, should you need to copy it later to any of the lab’s machines: `cp /usr/bin/unix-privesc-check ~/tools`
+Verify the tool is installed (bundled with Kali):
 
-If the script isn’t available on your Kali machine, you can download it directly from APT:
+```bash
+/usr/bin/unix-privesc-check
+```
+
+Alternatively, install it manually:
+
 ```bash
 sudo apt-get install unix-privesc-check -y
 ```
 
-We will use _unix-privesc-check_ to identify privilege escalation opportunities
+Optional: Copy it to the tools directory:
+
+```bash
+cp /usr/bin/unix-privesc-check ~/tools
+```
 
 ---
 
-## Assigning Aliases to Hacking Tools
-Tools that are installed through third-party repositories such as GitHub sometimes won’t have setup files that make running them easier. We can assign these tools bash aliases as shorthand references so that we won’t need to enter the full directory path every time we run them.
+## Assigning Aliases to Tools
 
-Run these if you use `bash` shell:
+For easier access, assign aliases to commonly used tools. Here are examples for both Bash and Zsh shells:
+
+### For Bash:
+
 ```bash
-echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> "~/.bashrc"
-
+echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> ~/.bashrc
 echo "alias gitjacker='/home/vincenzo/tools/gitjacker'" >> ~/.bashrc
+source ~/.bashrc
 ```
-If you use `zsh` shell:
+
+### For Zsh:
+
 ```bash
-echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> "~/.zshrc"
-
+echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> ~/.zshrc
 echo "alias gitjacker='/home/vincenzo/tools/gitjacker'" >> ~/.zshrc
+source ~/.zshrc
 ```
-RustScan and Gitjacker now have aliases.
 
-At this point, you should have a fully functioning bash hacking lab. Now would be a good time to take a snapshot of your Kali virtual machine so you can restore it to this clean state. Taking snapshots regularly is a good idea, especially whenever you make significant configuration changes or deploy new tools to your virtual lab.
+---
 
-___
-## References: 
-- [Nuclei templates](https://github.com/projectdiscovery/nuclei-templates)
-- [Linux Exploit Suggester 2](https://github.com/jondonas/linux-exploit-suggester-2.git)
+## Taking Snapshots
 
-Created:: 2024-12-03 15:55
+At this point, your lab environment is ready for use. To ensure you can recover the system quickly, take a snapshot of your Kali virtual machine. Regular snapshots are recommended whenever significant changes are made to the environment.
