@@ -6,7 +6,7 @@ ___
 
 # VULNERABILITY SCANNING & FUZZING
 
-## scanning websites with _nikto_
+## A) Scanning Websites with _nikto_
 
 _Nikto_ performs banner grabbing and runs a few basic checks to determine if the web server uses security headers to mitigate known web vulnerabilities; these vulnerabilities include _cross-site scripting_ (XSS), which is a client-side injection vulnerability targeting web browsers, and UI redressing (also known as _clickjacking_), a vulnerability that lets attackers use decoy layers in a web page to hijack user clicks. The security headers indicate to browsers what to do when loading certain resources and opening URLs, protecting the user from falling victim to an attack.
 
@@ -45,7 +45,7 @@ Directory _indexing_ is a server-side setting that, instead of a web page, lists
 
 Directory indexing lets you view files in the browser. You can click directories to open them, click files to download them, and so on. On the web page, you should identify two folders: acme-hyper branding and acme-impact-alliance. The acme-hyper-branding folder appears to contain a file named app.py. Download it to Kali by clicking it so it’s available for later inspection.
 
-### Building a Directory Indexing Scanner
+### _Building a Directory Indexing Scanner_
 What if we wanted to run a scan against a list of URLs to check whether they enable directory indexing, then download all the files they serve?
 ```bash
 #!/usr/bin/env bash
@@ -72,6 +72,75 @@ while read -r line; do
 	fi
 done < <(cat "${FILE}")
 ```
+This Bash script is designed to test multiple URLs (from a hosts file) for directory indexing. If directory indexing is found, it downloads the contents to a specified output folder.
 
+When we run script on our 2nd target it downloads folders we identified earlier. But the _acme-impact-alliance_ folder we downloaded appears to be empty. But is it really? When dealing with web servers, you may run into what seem to be dead ends only to find out that something is hiding there, just not in an obvious place. Take note of the empty folder for now; we’ll resume this exploration in a little bit.
+
+### _Identifying Suspicious robots.txt Entries_
+After scanning the third IP address, 172.16.10.12 (p-web-02), Nikto outputs the following:
+```bash
++ Server: Apache/2.4.54 (Debian)
++ Retrieved x-powered-by header: PHP/8.0.28
+--------
++ Uncommon header 'link' found, with contents: <http://172​.16​.10​.12​/wp​-json​/>;
+rel​="https://api​.w​.org​/"
+-------
++ Entry '/wp-admin/' in robots.txt returned a non-forbidden or redirect HTTP
+code (302)
++ Entry '​/donate​.php' in robots.txt returned a non-forbidden or redirect HTTP
+code (200)
++ "robots.txt" contains 17 entries which should be manually viewed.
++ /wp​-login​.php: Wordpress login found
+-------
+```
+Nikto was able to find a lot more information this time! It caught missing security headers (which is extremely common to see in the wild, unfortunately). Next, Nikto found that the server is running on Apache and Debian and that it is powered by PHP, a backend programming language commonly used in web applications.
+
+It also found an uncommon link that points to http://172​.16​.10​.12​/wp​-json and found two suspicious entries in the _robots.txt_ file—namely, `/wp-admin/` and ​`/donate​.php`. The _robots.txt_ file is a special file used to indicate to web crawlers (such as Google’s search engine) which endpoints to index and which to ignore. _Nikto_ hints that the _robots.txt_ file may have more entries than just these two and advises us to inspect it manually.
+
+Finding these non-indexed endpoints is useful during a penetration test because you can add them to your list of possible targets to test. When you open this file, you should notice a list of paths:
+```bash
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /z/j/
+Disallow: /z/c/
+Disallow: /stats/
+-------
+Disallow: /manual/*
+Disallow: /phpmanual/
+Disallow: /category/
+Disallow: /donate​.php
+Disallow: /amount_to_donate.txt
+```
+
+Finally, it also identified another endpoint at ​`/wp​-login​.php`, which is a login page for WordPress, a blog platform. Navigate to the main page at http://172​.16​.10​.12​/ to confirm you’ve identified a blog
+
+## Brute-Forcing directories with dirsearch
+The dirsearch fast directory brute-forcing tool is used to find hidden paths and files on web servers. Written in Python, dirsearch provides features such as built-in web directory wordlists, bring-your-own-dictionary options, and advanced response filtering. 
+
+Let's use it to try to identify additional attack vectors and verify that Nikto hasn’t missed anything obvious.
 
 ___
+
+## Tasks:
+1. Exploring Non-indexed Endpoints
+   
+   Nikto scanning returned a list of non-indexed endpoints. In this exercise, you’ll use bash to see whether they really exist on the server. Put together a script that will make an HTTP request to robots.txt, return the response, and iterate over each line, parsing the output to extract only the paths. Then the script should make an additional HTTP request to each path and check the status code it returns.
+   
+   Example:
+```bash
+#!/usr/bin/env bash
+
+TARGET_URL="http://172.16.10.12"
+ROBOTS_FILE="robots.txt"
+
+while read -r line; do
+	path=$(echo "${line}" | awk -F'Disallow: ' '{print $2}')
+	
+	if [[ -n "${path}" ]]; then 
+		url="${TARGET_URL}${path}"
+		status_code=$(curl -s -o /dev/null -w "%{http_code}" "${url}")
+		echo "URL: ${url} returned a status code of: ${status_code}"
+	fi
+
+done < <(curl -s "${TARGET_URL}/${ROBOTS_FILE}")
+```
